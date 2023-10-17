@@ -111,13 +111,13 @@ int akv_pkey_rsa_sign(EVP_PKEY_CTX *ctx, unsigned char *sig,
     size_t file_size = ftell(file);
     fseek(file, 0, SEEK_SET);
  
-    if (NULL == ptr) {
+    if (NULL == file) {
         printf("file can't be opened \n");
     }
 
     unsigned char* token = (unsigned char*)malloc(file_size+1);
 
-    fread(token, 1, file_size+1, file)
+    fread(token, 1, file_size+1, file);
 
     fclose(file);
     accessToken.memory = (unsigned char*)malloc(file_size+1);
