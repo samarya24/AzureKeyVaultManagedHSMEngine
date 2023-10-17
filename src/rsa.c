@@ -102,26 +102,28 @@ int akv_pkey_rsa_sign(EVP_PKEY_CTX *ctx, unsigned char *sig,
 
     MemoryStruct accessToken;
 
-    FILE* ptr;
-    char ch;
+    FILE* file;
  
     // Opening file in reading mode
-    ptr = fopen("/applicationgateway/accesstoken", "r");
+    file = fopen("/applicationgateway/accesstoken", "r");
+
+    fseek(file, 0, SEEK_END);
+    size_t file_size = ftell(file);
+    fseek(file, 0, SEEK_SET);
  
     if (NULL == ptr) {
         printf("file can't be opened \n");
     }
 
-    char buffer[1000];
+    unsigned char* token = (unsigned char*)malloc(file_size+1);
 
-    int i = 0, c; //c is the intermediate variable, i is the increment variable
-    while ((c = fgetc(ptr)) != EOF) {//Read contents until it reach the end of the file
-        buffer[i] = c;
-        i++;
-    }
+    fread(token, 1, file_size+1, file)
 
-    accessToken.memory=buffer;
-    accessToken.size=1000;
+    fclose(file);
+    accessToken.memory = (unsigned char*)malloc(file_size+1);
+    accessToken.size = file_size+1;
+    memcpy(accessToken.memory, token, file_size+1);
+    accessToken.memory[file_size]='\0';
     // if (!GetAccessTokenFromIMDS(akv_key->keyvault_type, &accessToken))
     // {
     //     return 0;
