@@ -115,15 +115,14 @@ int akv_pkey_rsa_sign(EVP_PKEY_CTX *ctx, unsigned char *sig,
         printf("file can't be opened \n");
     }
 
-    unsigned char* token = (unsigned char*)malloc(file_size+1);
+    unsigned char* token = (unsigned char*)malloc(file_size);
 
-    fread(token, 1, file_size+1, file);
+    fread(token, 1, file_size, file);
 
     fclose(file);
-    accessToken.memory = (unsigned char*)malloc(file_size+1);
-    accessToken.size = file_size+1;
-    memcpy(accessToken.memory, token, file_size+1);
-    accessToken.memory[file_size]='\0';
+    accessToken.memory = (unsigned char*)malloc(file_size);
+    accessToken.size = file_size;
+    memcpy(accessToken.memory, token, file_size);
     // if (!GetAccessTokenFromIMDS(akv_key->keyvault_type, &accessToken))
     // {
     //     return 0;
