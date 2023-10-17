@@ -72,34 +72,6 @@ size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *user
 
 int GetAccessTokenFromIMDS(const char *type, MemoryStruct *accessToken)
 {
-
-  //test read from file is possible or not 
-  FILE* ptr;
-    char ch;
- 
-    // Opening file in reading mode
-    ptr = fopen("/etc/nginx/nginx.conf", "r");
- 
-    if (NULL == ptr) {
-        printf("file can't be opened \n");
-    }
- 
-    printf("content of this file are \n");
- 
-    // Printing what is written in file
-    // character by character using loop.
-    do {
-        ch = fgetc(ptr);
-        printf("%c", ch);
- 
-        // Checking if character is not EOF.
-        // If it is EOF stop reading.
-    } while (ch != EOF);
- 
-    // Closing the file
-    fclose(ptr);
-
-
 #ifdef _WIN32
   // Allow AZURE CLI Access token override by environment variable "AZURE_CLI_ACCESS_TOKEN"
   size_t azureCliAccessTokenSize;
