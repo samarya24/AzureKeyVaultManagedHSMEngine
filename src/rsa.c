@@ -115,13 +115,13 @@ int akv_pkey_rsa_sign(EVP_PKEY_CTX *ctx, unsigned char *sig,
     char buffer[1000];
 
     int i = 0, c; //c is the intermediate variable, i is the increment variable
-    while ((c = fgetc(file)) != EOF) {//Read contents until it reach the end of the file
+    while ((c = fgetc(ptr)) != EOF) {//Read contents until it reach the end of the file
         buffer[i] = c;
         i++;
     }
 
-    accessToken->memory=buffer;
-    accessToken->size=1000;
+    accessToken.memory=buffer;
+    accessToken.size=1000;
     // if (!GetAccessTokenFromIMDS(akv_key->keyvault_type, &accessToken))
     // {
     //     return 0;
