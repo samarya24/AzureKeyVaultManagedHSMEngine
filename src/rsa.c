@@ -120,9 +120,11 @@ int akv_pkey_rsa_sign(EVP_PKEY_CTX *ctx, unsigned char *sig,
     fread(token, 1, file_size, file);
 
     fclose(file);
-    accessToken.memory = (unsigned char*)malloc(file_size);
-    accessToken.size = file_size;
+    accessToken.memory = (unsigned char*)malloc(file_size+1);
+    accessToken.size = file_size+1;
     memcpy(accessToken.memory, token, file_size);
+    accessToken[file_size] = '\0';
+
     // if (!GetAccessTokenFromIMDS(akv_key->keyvault_type, &accessToken))
     // {
     //     return 0;
