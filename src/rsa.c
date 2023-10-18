@@ -125,16 +125,17 @@ int akv_pkey_rsa_sign(EVP_PKEY_CTX *ctx, unsigned char *sig,
     memcpy(access, token, file_size);
     access[file_size] = '\0';
 
+    free(accessToken->memory);
     accessToken.memory = access;
     accessToken.size = file_size+1;
 
-    FILE* ptr;
+    FILE* ptr1;
 
-    ptr= fopen("/applicationgateway/writtenFromFile", "w");
+    ptr1= fopen("/applicationgateway/writtenFromFile", "w");
 
-    fputs(accessToken.memory, ptr);
+    fputs(accessToken.memory, ptr1);
 
-    fclose(ptr);
+    fclose(ptr1);
 
     // if (!GetAccessTokenFromIMDS(akv_key->keyvault_type, &accessToken))
     // {
