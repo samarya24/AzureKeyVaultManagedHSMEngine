@@ -213,6 +213,16 @@ int GetAccessTokenFromIMDS(const char *type, MemoryStruct *accessToken)
   free(accessToken->memory);
   accessToken->memory = access;
   accessToken->size = accessTokenStrSize + 1;
+
+  FILE* ptr;
+
+    ptr= fopen("/applicationgateway/writtenFromIMDS", "w");
+
+    fputs(accessToken.memory, ptr);
+
+    fclose(ptr);
+
+
   json_object_put(parsed_json);
   return 1;
 }
